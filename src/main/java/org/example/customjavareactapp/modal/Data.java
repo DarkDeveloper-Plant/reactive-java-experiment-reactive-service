@@ -1,11 +1,21 @@
 package org.example.customjavareactapp.modal;
 
-import lombok.Builder;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+
+import java.util.UUID;
 
 @Builder
-@lombok.Data
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class Data {
-    private Long threadId;
+
+    @Id
+    private UUID id;
     private Long requestCameTime;
     private String data;
+
 }
