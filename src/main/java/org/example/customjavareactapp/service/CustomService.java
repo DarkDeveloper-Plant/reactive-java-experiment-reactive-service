@@ -17,7 +17,7 @@ public class CustomService {
     private final DataRepo dataRepo;
 
     public Mono<Data> getData() {
-        return dataRepo.findAll().elementAt(0).delayElement(Duration.ofSeconds(1));
+        return dataRepo.findAll().elementAt(0).delayElement(Duration.ofMillis(100));
     }
 
     public Mono<Data> postData(DataDto dataDto) {
@@ -25,16 +25,7 @@ public class CustomService {
                 .data(dataDto.data())
                 .requestCameTime(System.currentTimeMillis())
                 .build();
-        return dataRepo.save(data).delayElement(Duration.ofMillis(100));
+        return dataRepo.save(data).delayElement(Duration.ofSeconds(1));
     }
 
-//    @PostConstruct
-//    void saveFirstData(){
-//        var data = Data.builder()
-//                .id(UUID.fromString("cd01675c-77da-4cfd-af32-36dbb7873782"))
-//                .data("data")
-//                .requestCameTime(System.currentTimeMillis())
-//                .build();
-//        dataRepo.save(data);
-//    }
 }
