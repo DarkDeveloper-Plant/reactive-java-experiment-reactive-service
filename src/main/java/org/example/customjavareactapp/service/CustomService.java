@@ -17,7 +17,7 @@ public class CustomService {
     private final DataRepo dataRepo;
 
     public Mono<Data> getData() {
-        return dataRepo.findAll().elementAt(0).delayElement(Duration.ofMillis(100));
+        return dataRepo.findFirstByOrderByRequestCameTimeAsc()/*.delayElement(Duration.ofMillis(2000))*/;
     }
 
     public Mono<Data> postData(DataDto dataDto) {
@@ -25,7 +25,7 @@ public class CustomService {
                 .data(dataDto.data())
                 .requestCameTime(System.currentTimeMillis())
                 .build();
-        return dataRepo.save(data).delayElement(Duration.ofSeconds(1));
+        return dataRepo.save(data).delayElement(Duration.ofSeconds(5));
     }
 
 }
